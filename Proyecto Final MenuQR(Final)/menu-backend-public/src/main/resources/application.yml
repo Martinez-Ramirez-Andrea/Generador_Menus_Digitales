@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    hikari:
+      max-lifetime: 1500000 # 25 minutes to stay below typical 30-minute DB idle timeout
+      idle-timeout: 600000  # 10 minutes to release idle connections sooner
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: 8080
+app:
+  frontend-base-url: "http://localhost:4200"
+  public-base-url: "http://localhost:8080"
+  jwt:
+    secret: ${APP_JWT_SECRET:CHANGE_ME_32_CHARS_MIN}
+    expiration-ms: 86400000
+cors:
+  allowed-origins: ${CORS_ORIGIN:http://localhost:4200}
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
